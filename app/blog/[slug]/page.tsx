@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { getPostBySlug, getPostSlugs } from "@/lib/blog";
-import { Metadata } from "next";
-import dynamic from "next/dynamic";
-import Image from "next/image";
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { getPostBySlug, getPostSlugs } from '@/lib/blog';
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -51,10 +51,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span>{post.author}</span>
               <span>•</span>
               <time dateTime={post.publishDate}>
-                {new Date(post.publishDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
+                {new Date(post.publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
                 })}
               </time>
             </div>
@@ -105,7 +105,7 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Post Not Found",
+      title: 'Post Not Found',
     };
   }
 

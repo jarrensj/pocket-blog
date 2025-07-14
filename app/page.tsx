@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { getAllPosts } from "@/lib/blog";
-import Image from "next/image";
+import Link from 'next/link';
+import { getAllPosts } from '@/lib/blog';
+import Image from 'next/image';
 
 export default async function Home() {
   const posts = await getAllPosts();
@@ -54,11 +54,11 @@ export default async function Home() {
                       <span>🍣</span>
                       <time dateTime={post.publishDate}>
                         {new Date(post.publishDate).toLocaleDateString(
-                          "en-US",
+                          'en-US',
                           {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
                           }
                         )}
                       </time>
