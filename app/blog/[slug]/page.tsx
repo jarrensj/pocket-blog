@@ -108,7 +108,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const metadata: Metadata = {
-    title: `${post.title} | pocket science`,
+    title: `${post.title} | Out of Pocket`,
     description: post.description,
     keywords: post.tags,
   }

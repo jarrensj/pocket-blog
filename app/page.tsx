@@ -9,7 +9,7 @@ export default async function Home() {
     <div className="min-h-screen p-8">
       <div className="container mx-auto max-w-4xl">
         <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">pocket science</h1>
+          <h1 className="text-4xl font-bold mb-4">Out of Pocket</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">not advice</p>
         </header>
         <main>

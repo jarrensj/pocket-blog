@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "pocket science",
-  description: "pocket science",
+  title: "Out of Pocket",
+  description: "Out of Pocket",
 };
 
 export default function RootLayout({
