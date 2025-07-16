@@ -1,52 +1,34 @@
-import fs from 'fs'
-import path from 'path'
+import { createClient } from '@supabase/supabase-js';
 import { BlogPost } from './types'
 
-const postsDirectory = path.join(process.cwd(), 'content/posts')
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function getAllPosts(): Promise<BlogPost[]> {
-  // Get all mdx files from content/posts directory
-  const fileNames = fs.readdirSync(postsDirectory)
-  const posts: BlogPost[] = []
-
-  for (const fileName of fileNames) {
-    if (fileName.endsWith('.mdx')) {
-      const slug = fileName.replace(/\.mdx$/, '')
-      const post = await getPostBySlug(slug)
-      if (post) {
-        posts.push(post)
-      }
-    }
-  }
-
-  // Sort posts by date in descending order
-  return posts.sort((a, b) => 
-    new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-  )
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('publishDate', { ascending: false });
+  if (error) throw error;
+  return data || [];
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  try {
-    const { metadata } = await import(`@/content/posts/${slug}.mdx`)
-    
-    return {
-      slug,
-      title: metadata.title,
-      description: metadata.description,
-      publishDate: metadata.publishDate,
-      author: metadata.author,
-      tags: metadata.tags,
-      image: metadata.image,
-    }
-  } catch (error) {
-    console.error(`Error loading post ${slug}:`, error)
-    return null
-  }
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+  if (error || !data) return null;
+  return data;
 }
 
 export async function getPostSlugs(): Promise<string[]> {
-  const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames
-    .filter((fileName) => fileName.endsWith('.mdx'))
-    .map((fileName) => fileName.replace(/\.mdx$/, ''))
+  const { data, error } = await supabase
+    .from('posts')
+    .select('slug')
+    .order('slug', { ascending: true });
+  if (error) throw error;
+  return data?.map(post => post.slug) || [];
 } 
