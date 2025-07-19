@@ -6,53 +6,64 @@ export default async function Home() {
   const posts = await getAllPosts();
 
   return (
-    <div className="p-8">
-      <div className="container mx-auto max-w-4xl">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">pocket science</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">not advice</p>
+    <div className="min-h-screen bg-[var(--background)]">
+      <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <header className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 text-[var(--sketch-charcoal)] tracking-wide">
+            pocket science
+          </h1>
+          <p className="text-lg sm:text-xl text-[var(--text-muted)] font-light tracking-wide">
+            not advice
+          </p>
         </header>
+        
         <main>
-          <div className="grid gap-8 md:gap-12">
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
             {posts.map((post) => (
               <article
                 key={post.slug}
-                className="border-b border-gray-200 dark:border-gray-700 pb-8"
+                className="textured-bg sketch-shadow rounded-lg p-4 sm:p-6 lg:p-8 border-[var(--border-subtle)] border transition-all duration-200 hover:shadow-lg"
               >
-                <div className="flex gap-6 mb-4">
-                  <div className="flex-shrink-0 w-48 h-36 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8">
+                  <div className="w-full sm:w-48 md:w-56 lg:w-56 h-48 sm:h-36 md:h-40 lg:h-40 flex-shrink-0 rounded-lg overflow-hidden sketch-border bg-[var(--parchment)]">
                     {post.image ? (
                       <Image
                         src={post.image}
                         alt={post.title}
-                        width={192}
-                        height={144}
+                        width={224}
+                        height={160}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                      <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
                         <svg
-                          className="w-8 h-8"
+                          className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 stroke-[1.5]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
-                        ></svg>
+                        >
+                        </svg>
                       </div>
                     )}
                   </div>
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold mb-2">
+                  
+                  <div className="flex-1 space-y-3 sm:space-y-4">
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-light leading-tight text-[var(--sketch-charcoal)]">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="hover:text-[var(--muted-ochre)] transition-colors duration-200"
                       >
                         {post.title}
                       </Link>
                     </h2>
-                    <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                      <span>{post.author}</span>
-                      <span>🍣</span>
-                      <time dateTime={post.publishDate}>
+                    
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-6 text-sm sm:text-base text-[var(--text-muted)] font-light">
+                      <span className="text-[var(--sketch-light)]">{post.author}</span>
+                      <span className="text-[var(--muted-ochre)]">🍣</span>
+                      <time 
+                        dateTime={post.publishDate}
+                        className="text-[var(--sketch-light)]"
+                      >
                         {new Date(post.publishDate).toLocaleDateString(
                           'en-US',
                           {
@@ -63,24 +74,40 @@ export default async function Home() {
                         )}
                       </time>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-700 dark:text-gray-300"
+                          className="px-3 sm:px-4 py-1 sm:py-2 bg-[var(--parchment)] border border-[var(--sketch-border)] rounded-full text-xs sm:text-sm text-[var(--sketch-accent)] font-light tracking-wide"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
+                    
+                    <p className="text-[var(--sketch-light)] text-base sm:text-lg leading-relaxed font-light">
                       {post.description}
                     </p>
+                    
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                      className="inline-flex items-center gap-2 text-[var(--muted-ochre)] hover:text-[var(--sketch-charcoal)] transition-colors duration-200 font-medium tracking-wide text-sm sm:text-base"
                     >
-                      Read more →
+                      Read more
+                      <svg
+                        className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
                     </Link>
                   </div>
                 </div>
