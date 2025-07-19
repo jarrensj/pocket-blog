@@ -65,12 +65,13 @@ export default async function Home() {
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {post.tags.map((tag) => (
-                        <span
+                        <Link
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-700 dark:text-gray-300"
+                          href={`/tags/${encodeURIComponent(tag)}`}
+                          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                         >
                           {tag}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                     <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
