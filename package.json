@@ -14,9 +14,9 @@
     "@next/mdx": "^15.3.4",
     "@vercel/analytics": "^1.5.0",
     "gray-matter": "^4.0.3",
-    "next": "15.3.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^15.3.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "rehype-highlight": "^7.0.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0"
