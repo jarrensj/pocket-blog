@@ -50,3 +50,23 @@ export async function getPostSlugs(): Promise<string[]> {
     .filter((fileName) => fileName.endsWith('.mdx'))
     .map((fileName) => fileName.replace(/\.mdx$/, ''))
 } 
+
+export async function getPostsByTag(tag: string): Promise<BlogPost[]> {
+  const allPosts = await getAllPosts()
+  return allPosts.filter(post => 
+    post.tags.some(postTag => 
+      postTag.toLowerCase() === tag.toLowerCase()
+    )
+  )
+}
+
+export async function getAllTags(): Promise<string[]> {
+  const allPosts = await getAllPosts()
+  const tagSet = new Set<string>()
+  
+  allPosts.forEach(post => {
+    post.tags.forEach(tag => tagSet.add(tag))
+  })
+  
+  return Array.from(tagSet).sort()
+} 

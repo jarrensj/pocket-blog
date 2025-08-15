@@ -77,12 +77,13 @@ export default async function Home() {
                     
                     <div className="flex flex-wrap gap-2 sm:gap-3">
                       {post.tags.map((tag) => (
-                        <span
+                        <Link
                           key={tag}
-                          className="px-3 sm:px-4 py-1 sm:py-2 bg-[var(--parchment)] border border-[var(--sketch-border)] rounded-full text-xs sm:text-sm text-[var(--sketch-accent)] font-light tracking-wide"
+                          href={`/tags/${encodeURIComponent(tag)}`}
+                          className="px-3 sm:px-4 py-1 sm:py-2 bg-[var(--parchment)] border border-[var(--sketch-border)] rounded-full text-xs sm:text-sm text-[var(--sketch-accent)] font-light tracking-wide hover:bg-[var(--sketch-light)] hover:text-[var(--background)] transition-colors duration-200"
                         >
                           {tag}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                     
